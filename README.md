@@ -4,11 +4,13 @@
 Bugs
 - Greenball sometimes passes through player
 
+Done
+- Reduce frequency of golden ball spawning (done)
+- Increase spawner frequency after x score
 
 TO DO
 - End game screen and menu(10 negative points or 3 negative points back to back)
 - Start game menu
-- Reduce frequency of golden ball spawning
 - Touch controls suck
 - Art
 

@@ -6,21 +6,23 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject[] spawnItems;
-    public float Frequency { get; private set; }
+    
+    public float TimeBetweenSpawns { get; private set; } = 2f;
     float lastSpawnTime;
     public Transform[] spawnPositions;
+    public int goldenChance { get; set; }
 
     private void Awake()
     {
-        Frequency = 2f;
+        //Chance for golden ball spawn (0-100)%
+        goldenChance = 5;
     }
     void FixedUpdate()
     {
-
-        if (Time.time > lastSpawnTime + Frequency)
+        
+        if (Time.time > lastSpawnTime + TimeBetweenSpawns)
         {
-            int randomItem = Random.Range(0, spawnItems.Length);
-            GameObject spawnItem = spawnItems[randomItem];
+            GameObject spawnItem = GetRandomGameObject();
             int randomPosition = Random.Range(0, spawnPositions.Length);
             Vector3 position = spawnPositions[randomPosition].transform.position;
             GameObject newSpawnObject = Instantiate(spawnItem, position, Quaternion.identity);
@@ -29,6 +31,20 @@ public class Spawner : MonoBehaviour
     }
     public void incrementFreq()
     {
-        Frequency += 1;
+        TimeBetweenSpawns -= 0.5f;
+    }
+
+    private GameObject GetRandomGameObject()
+    {
+        int randomInt = Random.Range(0, 100);
+        if(randomInt <= goldenChance)
+        {
+            return spawnItems[spawnItems.Length - 1];
+        }
+        else
+        {
+            randomInt = Random.Range(0, spawnItems.Length - 1);
+            return spawnItems[randomInt];
+        }
     }
 }

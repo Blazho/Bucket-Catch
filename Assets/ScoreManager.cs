@@ -11,11 +11,16 @@ public class ScoreManager : MonoBehaviour
     public int ConsecutiveFouls { get; private set; }
 
     public int totalNegativePoints { get; private set; }
+    //Spawner script from spawn's gameobject
+    public Spawner Spawner { get; set; }
+    //How many points needed to reduce time between spawns
+    public int pointsToSpeed { get; set; } = 10;
 
 
     void Awake()
     {
         scoreText = gameObject.GetComponent<TextMeshProUGUI>();
+        Spawner = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Spawner>();
         score = 0;
         display();
         ConsecutiveFouls = 0;
@@ -26,7 +31,11 @@ public class ScoreManager : MonoBehaviour
     public void AddPoint(int a)
     {
         score+= a;
-        
+        if (score == pointsToSpeed && Spawner.TimeBetweenSpawns == 2)
+        {
+            Spawner.incrementFreq();
+            Debug.Log("Frequency incresed to: " + Spawner.TimeBetweenSpawns);
+        }
         ConsecutiveFouls = 0;
         display();
     }
@@ -36,12 +45,11 @@ public class ScoreManager : MonoBehaviour
         score--;
         ConsecutiveFouls++;
         totalNegativePoints++;
-        Debug.Log("Fouls: " + ConsecutiveFouls);
-        Debug.Log("NegativePoints: " + totalNegativePoints);
+        Debug.Log("NegativePoints: " + totalNegativePoints + " Fouls: " + ConsecutiveFouls);
         display();
         if (ConsecutiveFouls == 3 || totalNegativePoints >= 10)
         {
-            scoreText.text = "You lose";
+            //scoreText.text = "You lose";
         }
     }
 

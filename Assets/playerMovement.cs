@@ -16,8 +16,6 @@ public class playerMovement : MonoBehaviour
         width = (float)Screen.width / 2.0f;
         TimePurple = Time.time;
         isPurple = false;
-        Debug.Log("Time purple = " + TimePurple);
-        Debug.Log(Time.time + 10);
 
     }
     void Start()
