@@ -9,12 +9,14 @@ public class GoldenBallExtra : Ball
     private MeshRenderer playerMesh;
     private playerMovement playerClass;
     private GameObject player;
+    private PurpleTimer playerTimer;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerMesh = player.GetComponent<MeshRenderer>();
         playerClass = player.GetComponent<playerMovement>();
+        playerTimer = GameObject.FindGameObjectWithTag("PurpleTimer").GetComponent<PurpleTimer>();
     }
 
     private void FixedUpdate()
@@ -36,7 +38,7 @@ public class GoldenBallExtra : Ball
             playerMesh.material.color = new Color(1, 0, 1, 1);
             playerClass.TimePurple = Time.time;
             playerClass.isPurple = true;
-
+            playerTimer.startTimer();
 
         }
     }

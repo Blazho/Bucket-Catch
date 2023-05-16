@@ -64,7 +64,7 @@ public class playerMovement : MonoBehaviour
     }
     private void shrinkPlayer()
     {
-        gameObject.transform.localScale = Vector3.one;
+        gameObject.transform.localScale = new Vector3(1, 1, 2);
         gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
         isPurple = false;
     }

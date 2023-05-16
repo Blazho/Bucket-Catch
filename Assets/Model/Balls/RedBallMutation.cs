@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class RedBallMutation : Ball
 {
-    public bool Jumped { get; private set; }
-    public int Movment { get; private set; }
+    public bool Jumped { get;  set; }
+    public int Movment { get;  set; }
 
     public Vector3 Direction { get; private set; }
     void Awake()
     {
         Jumped = false;
-        Movment = 8;
+        Movment = 7;
         Direction = transform.right * getLine();
     }
 
@@ -19,7 +19,7 @@ public class RedBallMutation : Ball
     private void FixedUpdate()
     {
 
-        if (!Jumped && gameObject.transform.position.z < -235 && gameObject.transform.position.z > -240 )
+        if (!Jumped && gameObject.transform.position.z < -220 && gameObject.transform.position.z > -240 )
         {
             gameObject.GetComponent<Rigidbody>().AddForce(Direction, ForceMode.Impulse);
             Jumped = true;
@@ -34,7 +34,7 @@ public class RedBallMutation : Ball
     {
         if(gameObject.transform.position.x == 0)
         {
-            int side = Random.Range(0, 1);
+            int side = Random.Range(0, 2);
             return (side == 0) ? -1 * Movment : 1 * Movment;
             
         }
